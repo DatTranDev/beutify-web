@@ -4,8 +4,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      Hello world
-      <Link href="/product" >Go to Product</Link>
+      <div>
+        <img src="/images/banner.jpeg" className="w-[100%]" alt="" />
+      </div>
     </div>
   );
 }
