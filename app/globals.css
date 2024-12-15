@@ -7,8 +7,10 @@
   --yellow: #FFD199;
   --lpeach: #FFBE99;
   --pink: #FF9B99;
+  --lpink: #faabaa;
   --lyellow: #FFDF99;
   --wheat: #FFE8DB;
+  --hwheat: rgba(255, 232, 219, 0.5);
 }
 
 body {
