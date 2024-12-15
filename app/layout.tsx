@@ -26,6 +26,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
+        />
+      </head>
       <body>
         <header className="flex py-4 px-40 justify-between items-center border-b shadow-sm shadow-gray-400 fixed top-0 left-0 w-full bg-white z-50">
           <div className="flex items-center ml-4">
