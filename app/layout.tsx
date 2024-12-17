@@ -39,7 +39,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <header className="flex py-4 px-40 justify-between items-center border-b shadow-sm shadow-gray-400 fixed top-0 left-0 w-full bg-white z-50">
+        <header className="flex py-4 px-40 justify-between items-center border-b shadow-sm shadow-gray-400 sticky  top-0 left-0 w-full bg-white z-50">
           <div className="flex items-center ml-4">
             <img src="/icons/textLogo.svg" className="h-10" alt="logo" />
           </div>
@@ -56,58 +56,58 @@ export default function RootLayout({
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Sản phẩm</NavigationMenuTrigger>
                   <NavigationMenuContent >
-                  <ul className="grid gap-3 p-4 md:w-[200px] lg:w-[300px] lg:grid-cols-[.75fr_1fr] font-sans font-medium">
-                    <li className="col">
-                      <NavigationMenuLink asChild>
-                        <a
-                          className="font-sans font-medium"
-                          href="/product"
-                        >
-                          Tất cả
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="">
-                      <NavigationMenuLink asChild>
-                        <a
-                          className="font-sans font-medium"
-                          href="/product/1"
-                        >
-                          Eyes
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="">
-                      <NavigationMenuLink asChild>
-                        <a
-                          className=""
-                          href="/product/3"
-                        >
-                          Face
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="">
-                      <NavigationMenuLink asChild>
-                        <a
-                          className=""
-                          href="/product/2"
-                        >
-                          Lip
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a
-                          className=""
-                          href="/product/4"
-                        >
-                          Makeup Tools
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
+                    <ul className="grid gap-3 p-4 md:w-[200px] lg:w-[300px] lg:grid-cols-[.75fr_1fr] font-sans font-medium">
+                      <li className="col">
+                        <NavigationMenuLink asChild>
+                          <a
+                            className="font-sans font-medium"
+                            href="/product"
+                          >
+                            Tất cả
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                      <li className="">
+                        <NavigationMenuLink asChild>
+                          <a
+                            className="font-sans font-medium"
+                            href="/product/1"
+                          >
+                            Eyes
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                      <li className="">
+                        <NavigationMenuLink asChild>
+                          <a
+                            className=""
+                            href="/product/3"
+                          >
+                            Face
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                      <li className="">
+                        <NavigationMenuLink asChild>
+                          <a
+                            className=""
+                            href="/product/2"
+                          >
+                            Lip
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <a
+                            className=""
+                            href="/product/4"
+                          >
+                            Makeup Tools
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                    </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
@@ -128,8 +128,8 @@ export default function RootLayout({
             </NavigationMenu>
           </div>
           <div className="flex items-center mr-8 pl-8">
-            <Search className="h-6 mr-8"/>
-            <Heart className="h-6"/>
+            <Search className="h-6 mr-8" />
+            <Heart className="h-6" />
           </div>
         </header>
         <div className="">
@@ -160,7 +160,7 @@ export default function RootLayout({
 
             {/* Column 2: Contact Info */}
             <div className="text-center md:text-left">
-              <div className="h-24"> 
+              <div className="h-24">
               </div>
               <button
                 className="bg-[--pink] hover:bg-[--lpink] text-white px-8 py-2 rounded-xl shadow-lg"

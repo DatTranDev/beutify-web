@@ -1,5 +1,5 @@
 'use client';
-
+import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 // import Swiper and modules styles
@@ -7,50 +7,53 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
 export default function Home() {
   const banners = [
     { src: "/images/banner1.jpg", alt: "Banner 1" },
     { src: "/images/banner2.jpg", alt: "Banner 2" },
   ];
   const products = [
-    { 
-      id: 1, 
+    {
+      id: 1,
       image: "/images/product1.png", // Replace with actual image
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: true 
+      title: "Son môi MAC Matte Lipstick",
+      price: "230,000đ",
+      rating: 3.5,
+      reviews: "1.7k",
+      favorite: true
     },
-    { 
-      id: 2, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
+    {
+      id: 2,
+      image: "/images/product1.png",
+      title: "Son môi MAC Matte Lipstick",
+      price: "230,000đ",
+      rating: 3.5,
+      reviews: "1.7k",
+      favorite: false
     },
-    { 
-      id: 3, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
+    {
+      id: 3,
+      image: "/images/product1.png",
+      title: "Son môi MAC Matte Lipstick",
+      price: "230,000đ",
+      rating: 3.5,
+      reviews: "1.7k",
+      favorite: false
     },
-    { 
-      id: 4, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
+    {
+      id: 4,
+      image: "/images/product1.png",
+      title: "Son môi MAC Matte Lipstick",
+      price: "230,000đ",
+      rating: 3.5,
+      reviews: "1.7k",
+      favorite: false
     }
   ];
+  const router = useRouter();
+  const viewProductDtails = () => {
+    return router.push('/product/10')
+  }
 
   return (
     <div>
@@ -119,7 +122,7 @@ export default function Home() {
                 letters, as opposed to using 'Content here, content here', making it
                 look like readable English.
               </p>
-              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full">
+              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full" onClick={viewProductDtails}>
                 Xem chi tiết
               </button>
             </div>
@@ -135,13 +138,13 @@ export default function Home() {
                   NEW
                 </span>
               </div>
-            </div>       
+            </div>
           </div>
         </div>
         <div className="py-6 px-44">
           {/* Section Title */}
           <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
-          
+
           {/* Product Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {products.map((product) => (
@@ -157,7 +160,7 @@ export default function Home() {
                     <span className="text-gray-400 text-xl">&hearts;</span>
                   )}
                 </div>
-                
+
                 {/* Product Image */}
                 <img
                   src={product.image}
@@ -176,9 +179,8 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
                       key={index}
-                      className={`text-yellow-400 ${
-                        index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                      }`}
+                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
+                        }`}
                     >
                       &#9733;
                     </span>
@@ -203,7 +205,7 @@ export default function Home() {
                   NEW
                 </span>
               </div>
-            </div>    
+            </div>
             {/* Left Content Section */}
             <div className="lg:w-1/2 mb-8 lg:mb-0">
               <h2 className="text-2xl lg:text-3xl font-bold italic mb-4 text-gray-800">
@@ -216,7 +218,7 @@ export default function Home() {
                 letters, as opposed to using 'Content here, content here', making it
                 look like readable English.
               </p>
-              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full">
+              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full" onClick={viewProductDtails}>
                 Xem chi tiết
               </button>
             </div>
@@ -225,7 +227,7 @@ export default function Home() {
         <div className="py-6 px-44">
           {/* Section Title */}
           <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
-          
+
           {/* Product Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {products.map((product) => (
@@ -241,7 +243,7 @@ export default function Home() {
                     <span className="text-gray-400 text-xl">&hearts;</span>
                   )}
                 </div>
-                
+
                 {/* Product Image */}
                 <img
                   src={product.image}
@@ -260,9 +262,8 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
                       key={index}
-                      className={`text-yellow-400 ${
-                        index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                      }`}
+                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
+                        }`}
                     >
                       &#9733;
                     </span>
