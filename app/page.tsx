@@ -1,279 +1,221 @@
 'use client';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-// import Swiper and modules styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import { getCookies, navigate } from "@/lib/action";
+import { useEffect, useState } from "react";
 
-export default function Home() {
-  const banners = [
-    { src: "/images/banner1.jpg", alt: "Banner 1" },
-    { src: "/images/banner2.jpg", alt: "Banner 2" },
-  ];
-  const products = [
-    { 
-      id: 1, 
-      image: "/images/product1.png", // Replace with actual image
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: true 
-    },
-    { 
-      id: 2, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
-    },
-    { 
-      id: 3, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
-    },
-    { 
-      id: 4, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
-    }
-  ];
+export default function Page1() {
+    const [currentPage, setCurrentPage] = useState(1);
 
-  return (
-    <div>
-      {/* Slider Banner */}
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        pagination={{ clickable: true }}
-        effect="fade"
-        loop={true}
-        className="w-full"
-      >
-        {banners.map((banner, index) => (
-          <SwiperSlide key={index}>
-            <img
-              src={banner.src}
-              alt={banner.alt}
-              className="w-full h-[500px] object-cover"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    // State to store answers
+    const [answers, setAnswers] = useState({
+        age: "",
+        gender: "",
+        purpose: "",
+        skin: "",
+        scent: "",
+    });
 
-      {/* Content */}
-      <div className=" mt-8">
-        <div className="flex flex-col gap-8 h-[520px] px-44">
-          {/* Top Image */}
-          <div className="w-full max-w-3xl relative z-10">
-            <img
-              src="/images/home_about_top.webp"
-              alt="Top Display"
-              className="w-auto max-h-[300px] rounded-lg shadow-md z-10"
-            />
-          </div>
+    // Handle next and previous page
+    const nextPage = () => setCurrentPage((prev) => prev + 1);
+    const prevPage = () => setCurrentPage((prev) => prev - 1);
 
-          {/* Slogan Section */}
-          <div className="px-4 absolute w-[480px] left-[55%] ">
-            <h2 className="text-xl md:text-3xl font-bold italic mb-4 ">
-              NGƯỜI BẠN ĐỒNG HÀNH CHO MỌI TÍN ĐỒ LÀM ĐẸP
-            </h2>
-            <p className="text-sm md:text-base text-gray-600 italic">
-              Mang đến trải nghiệm mua sắm đầy cảm hứng, giúp mỗi cá nhân khám phá và
-              tỏa sáng với phong cách độc đáo của mình.
-            </p>
-          </div>
+    useEffect(() => {
+        const handleCookies = async () => {
+            const userCookie = await getCookies("user");
+            const userString = userCookie?.value;
+            if (!userString) {
+                navigate("/login");
+            }
+        };
+        handleCookies();
+    }, []);
 
-          {/* Bottom Image */}
-          <div className="self-end items-end flex flex-row absolute top-[100%]">
-            <img
-              src="/images/home_about_bot.webp"
-              alt="Bottom Display"
-              className="w-auto max-h-[300px] rounded-lg shadow-md self-end"
-            />
-          </div>
-        </div>
-        <div className="bg-[--hwheat] px-44">
-          <div className="py-8 flex flex-col lg:flex-row justify-between items-center gap-4">
-            {/* Left Content Section */}
-            <div className="lg:w-1/2 mb-8 lg:mb-0">
-              <h2 className="text-2xl lg:text-3xl font-bold italic mb-4 text-gray-800">
-                Why do we use it? Where can I get some?
-              </h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                It is a long established fact that a reader will be distracted by the
-                readable content of a page when looking at its layout. The point of
-                using Lorem Ipsum is that it has a more-or-less normal distribution of
-                letters, as opposed to using 'Content here, content here', making it
-                look like readable English.
-              </p>
-              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full">
-                Xem chi tiết
-              </button>
+    // Handle answer selection
+    const handleSelect = (question: string, value: string) => {
+        setAnswers((prev) => ({ ...prev, [question]: value }));
+    };
+
+    // Reusable button class for styling
+    const buttonStyle = (isSelected: boolean) =>
+        `px-4 py-2 rounded-md ${
+            isSelected ? "bg-[#FF9B99] text-white" : "bg-gray-200 hover:bg-gray-300"
+        }`;
+
+    return (
+        <div className="min-h-screen bg-[#FFAD99] flex items-center justify-center">
+            <div className="bg-white shadow-md rounded-md p-6 w-full max-w-4xl">
+                <img src="/icons/textLogo.svg" className="m-auto" />
+                <h1 className="text-center font-semibold italic text-3xl my-6 roboto-medium text-[#FF9B99]">
+                    Hãy cung cấp một vài thông tin để tối ưu trải nghiệm mua sắm của bạn nhé!
+                </h1>
+
+                {/* Page 1: Personal Information */}
+                {currentPage === 1 && (
+                    <div>
+                        <h2 className="text-2xl font-bold mb-4">Thông tin cá nhân</h2>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block font-medium mb-2">
+                                    1. Tuổi của bạn là bao nhiêu?
+                                </label>
+                                <div className="flex gap-2">
+                                    {["Dưới 18", "18-24", "25-34", "35-44", "Trên 45"].map(
+                                        (age) => (
+                                            <button
+                                                key={age}
+                                                onClick={() => handleSelect("age", age)}
+                                                className={buttonStyle(answers.age === age)}
+                                            >
+                                                {age}
+                                            </button>
+                                        )
+                                    )}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block font-medium mb-2">2. Bạn là:</label>
+                                <div className="flex gap-2">
+                                    {["Nam", "Nữ", "Khác"].map((gender) => (
+                                        <button
+                                            key={gender}
+                                            onClick={() => handleSelect("gender", gender)}
+                                            className={buttonStyle(answers.gender === gender)}
+                                        >
+                                            {gender}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-end mt-4">
+                            <button
+                                onClick={nextPage}
+                                className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Page 2: Beauty Needs */}
+                {currentPage === 2 && (
+                    <div>
+                        <h2 className="text-2xl font-bold mb-4">Thói quen và nhu cầu làm đẹp</h2>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block font-medium mb-2">
+                                    1. Bạn thường sử dụng sản phẩm làm đẹp với mục đích gì?
+                                </label>
+                                {["Chăm sóc da", "Trang điểm", "Chăm sóc tóc", "Chăm sóc cơ thể"].map(
+                                    (purpose) => (
+                                        <div
+                                            key={purpose}
+                                            className="flex items-center gap-2"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="purpose"
+                                                checked={answers.purpose === purpose}
+                                                onChange={() => handleSelect("purpose", purpose)}
+                                            />
+                                            <span>{purpose}</span>
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex justify-between mt-4">
+                            <button
+                                onClick={prevPage}
+                                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                            >
+                                Previous
+                            </button>
+                            <button
+                                onClick={nextPage}
+                                className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Page 3: Skin Problems */}
+                {currentPage === 3 && (
+                    <div>
+                        <h2 className="text-2xl font-bold mb-4">Vấn đề gặp phải</h2>
+                        <div>
+                            <label className="block font-medium mb-2">1. Loại da của bạn là gì?</label>
+                            {["Da thường", "Da khô", "Da dầu", "Da hỗn hợp"].map((skin) => (
+                                <div key={skin} className="flex items-center gap-2">
+                                    <input
+                                        type="radio"
+                                        name="skin"
+                                        checked={answers.skin === skin}
+                                        onChange={() => handleSelect("skin", skin)}
+                                    />
+                                    <span>{skin}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex justify-between mt-4">
+                            <button
+                                onClick={prevPage}
+                                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                            >
+                                Previous
+                            </button>
+                            <button
+                                onClick={nextPage}
+                                className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Page 4: Preferences */}
+                {currentPage === 4 && (
+                    <div>
+                        <h2 className="text-2xl font-bold mb-4">Sở thích cá nhân</h2>
+                        <div>
+                            <label className="block font-medium mb-2">
+                                1. Bạn thích sản phẩm làm đẹp có mùi hương như thế nào?
+                            </label>
+                            {["Ngọt ngào", "Thanh mát", "Không mùi"].map((scent) => (
+                                <div key={scent} className="flex items-center gap-2">
+                                    <input
+                                        type="radio"
+                                        name="scent"
+                                        checked={answers.scent === scent}
+                                        onChange={() => handleSelect("scent", scent)}
+                                    />
+                                    <span>{scent}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="flex justify-between mt-4">
+                            <button
+                                onClick={prevPage}
+                                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                            >
+                                Previous
+                            </button>
+                            <button
+                                onClick={() => navigate("/home")}
+                                className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
+                            >
+                                Finish
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
-            {/* Right Section with Single Image */}
-            <div className="lg:w-1/2 flex justify-end">
-              <div className="relative">
-                <img
-                  src="/images/product1.png" // Replace with actual image
-                  alt="Product"
-                  className="w-auto max-h-[380px] rounded-lg shadow-lg "
-                />
-                <span className="absolute -top-4 -right-4 bg-[--peach] text-white text-xs font-bold px-3 py-1 rounded-full">
-                  NEW
-                </span>
-              </div>
-            </div>       
-          </div>
         </div>
-        <div className="py-6 px-44">
-          {/* Section Title */}
-          <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
-          
-          {/* Product Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                {/* Favorite Icon */}
-                <div className="flex justify-end">
-                  {product.favorite ? (
-                    <span className="text-red-500 text-xl">&hearts;</span>
-                  ) : (
-                    <span className="text-gray-400 text-xl">&hearts;</span>
-                  )}
-                </div>
-                
-                {/* Product Image */}
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-32 h-32 mx-auto mb-4 object-contain"
-                />
-
-                {/* Product Details */}
-                <h3 className="text-sm font-semibold text-gray-800 text-center mb-1">
-                  {product.title}
-                </h3>
-                <p className="text-center text-gray-600 mb-2">Giá: <strong>{product.price}</strong></p>
-
-                {/* Rating */}
-                <div className="flex items-center justify-center space-x-1">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <span
-                      key={index}
-                      className={`text-yellow-400 ${
-                        index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                      }`}
-                    >
-                      &#9733;
-                    </span>
-                  ))}
-                  <span className="text-gray-500 text-sm">({product.reviews})</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-[--hwheat] px-44">
-          <div className="py-8 flex flex-col lg:flex-row justify-between items-center gap-4">
-            {/* Right Section with Single Image */}
-            <div className="lg:w-1/2 flex justify-start">
-              <div className="relative">
-                <img
-                  src="/images/product1.png" // Replace with actual image
-                  alt="Product"
-                  className="w-auto max-h-[380px] rounded-lg shadow-lg "
-                />
-                <span className="absolute -top-4 -right-4 bg-[--peach] text-white text-xs font-bold px-3 py-1 rounded-full">
-                  NEW
-                </span>
-              </div>
-            </div>    
-            {/* Left Content Section */}
-            <div className="lg:w-1/2 mb-8 lg:mb-0">
-              <h2 className="text-2xl lg:text-3xl font-bold italic mb-4 text-gray-800">
-                Why do we use it? Where can I get some?
-              </h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                It is a long established fact that a reader will be distracted by the
-                readable content of a page when looking at its layout. The point of
-                using Lorem Ipsum is that it has a more-or-less normal distribution of
-                letters, as opposed to using 'Content here, content here', making it
-                look like readable English.
-              </p>
-              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full">
-                Xem chi tiết
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="py-6 px-44">
-          {/* Section Title */}
-          <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
-          
-          {/* Product Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                {/* Favorite Icon */}
-                <div className="flex justify-end">
-                  {product.favorite ? (
-                    <span className="text-red-500 text-xl">&hearts;</span>
-                  ) : (
-                    <span className="text-gray-400 text-xl">&hearts;</span>
-                  )}
-                </div>
-                
-                {/* Product Image */}
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-32 h-32 mx-auto mb-4 object-contain"
-                />
-
-                {/* Product Details */}
-                <h3 className="text-sm font-semibold text-gray-800 text-center mb-1">
-                  {product.title}
-                </h3>
-                <p className="text-center text-gray-600 mb-2">Giá: <strong>{product.price}</strong></p>
-
-                {/* Rating */}
-                <div className="flex items-center justify-center space-x-1">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <span
-                      key={index}
-                      className={`text-yellow-400 ${
-                        index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                      }`}
-                    >
-                      &#9733;
-                    </span>
-                  ))}
-                  <span className="text-gray-500 text-sm">({product.reviews})</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

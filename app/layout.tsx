@@ -37,9 +37,12 @@ export default function RootLayout({
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" /> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"></link>
       </head>
       <body>
-        <header className="flex py-4 px-40 justify-between items-center border-b shadow-sm shadow-gray-400 fixed top-0 left-0 w-full bg-white z-50">
+        {/* <header className="flex py-4 px-40 justify-between items-center border-b shadow-sm shadow-gray-400 fixed top-0 left-0 w-full bg-white z-50">
           <div className="flex items-center ml-4">
             <img src="/icons/textLogo.svg" className="h-10" alt="logo" />
           </div>
@@ -131,13 +134,12 @@ export default function RootLayout({
             <Search className="h-6 mr-8"/>
             <Heart className="h-6"/>
           </div>
-        </header>
+        </header> */}
         <div className="">
           {children}
         </div>
-        <footer className="bg-[--hwheat]  px-44 py-12">
+        {/* <footer className="bg-[--hwheat]  px-44 py-12">
           <div className="container grid grid-cols-3 md:grid-cols-3 gap-16">
-            {/* Column 1: Newsletter */}
             <div className="text-center md:text-left">
               <h3 className="text-4xl font-bold p-0 m-0">Nhận thông tin</h3>
               <h3 className="text-4xl font-bold mb-4 p-0 ">khuyến mãi</h3>
@@ -158,7 +160,6 @@ export default function RootLayout({
               </div>
             </div>
 
-            {/* Column 2: Contact Info */}
             <div className="text-center md:text-left">
               <div className="h-24"> 
               </div>
@@ -177,7 +178,6 @@ export default function RootLayout({
               </div>
             </div>
 
-            {/* Column 3: Social Links */}
             <div className="text-center md:text-left">
               <img src="/icons/logo.svg" className="h-36" alt="logo" />
               <div className="mt-10">
@@ -196,7 +196,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-        </footer>
+        </footer> */}
       </body>
     </html>
   );
