@@ -1,9 +1,12 @@
-declare type  Product = {
-    id: string;
-    name: string;
-    category: string;
-    shortDescription: string;
-    description: string;
-    price: number;
-    image: string[];
-}
+    declare type  Product = {
+        id: number;
+        name: string;
+        category: string;
+        shortDescription: string;
+        description: string;
+        price: string;
+        image: string[];
+        favorite: boolean;
+        reviews: string;
+        rating: number;
+    }

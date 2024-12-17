@@ -2,6 +2,7 @@
 
 import { getCookies, navigate } from "@/lib/action";
 import { useEffect, useState } from "react";
+import { useWishlist } from "@/context/WishListContext";
 
 export default function Page1() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,12 +20,14 @@ export default function Page1() {
     const nextPage = () => setCurrentPage((prev) => prev + 1);
     const prevPage = () => setCurrentPage((prev) => prev - 1);
 
+    
+
     useEffect(() => {
         const handleCookies = async () => {
             const userCookie = await getCookies("user");
             const userString = userCookie?.value;
             if (!userString) {
-                navigate("/login");
+                navigate("/home");
             }
         };
         handleCookies();

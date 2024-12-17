@@ -7,50 +7,66 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { useWishlist } from "@/context/WishListContext";
 
-export default function Home() {
+export default function home() {
+  const { wishlist, addToWishlist, removeFromWishlist} = useWishlist();
+
   const banners = [
     { src: "/images/banner1.jpg", alt: "Banner 1" },
     { src: "/images/banner2.jpg", alt: "Banner 2" },
   ];
-  const products = [
+  const products: Product[] = [
     { 
       id: 1, 
-      image: "/images/product1.png", // Replace with actual image
-      title: "Son môi MAC Matte Lipstick", 
+      name: "Son môi MAC Matte Lipstick", 
+      category: "Lip", 
+      shortDescription: "A beautiful lipstick", 
+      description: "Long-lasting lipstick.",
       price: "230,000đ", 
-      rating: 3.5, 
+      image: ["/images/product1.png"], 
+      favorite: true, 
       reviews: "1.7k", 
-      favorite: true 
+      rating: 3.5
     },
     { 
       id: 2, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
+      name: "Son môi Dior Rouge Lipstick", 
+      category: "Lip", 
+      shortDescription: "A luxurious Dior lipstick", 
+      description: "Smooth and creamy texture for elegant lips.",
+      price: "450,000đ", 
+      image: ["/images/product1.png"], 
+      favorite: false, 
+      reviews: "2.5k", 
+      rating: 4.5
     },
     { 
       id: 3, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
+      name: "Son dưỡng Nivea Care", 
+      category: "Skincare", 
+      shortDescription: "Moisturizing lip balm", 
+      description: "Provides soft and nourished lips throughout the day.",
+      price: "90,000đ", 
+      image: ["/images/product1.png"], 
+      favorite: false, 
+      reviews: "500", 
+      rating: 4.0
     },
     { 
       id: 4, 
-      image: "/images/product1.png", 
-      title: "Son môi MAC Matte Lipstick", 
-      price: "230,000đ", 
-      rating: 3.5, 
-      reviews: "1.7k", 
-      favorite: false 
-    }
+      name: "Kem dưỡng ẩm Cetaphil", 
+      category: "Skincare", 
+      shortDescription: "Gentle moisturizing cream", 
+      description: "Clinically proven to hydrate and soothe dry skin.",
+      price: "300,000đ", 
+      image: ["/images/product1.png"], 
+      favorite: false, 
+      reviews: "1.2k", 
+      rating: 4.2
+    },
   ];
+  
 
   return (
     <div>
@@ -160,14 +176,14 @@ export default function Home() {
                 
                 {/* Product Image */}
                 <img
-                  src={product.image}
-                  alt={product.title}
+                  src={product.image[0]}
+                  alt={product.name}
                   className="w-32 h-32 mx-auto mb-4 object-contain"
                 />
 
                 {/* Product Details */}
                 <h3 className="text-sm font-semibold text-gray-800 text-center mb-1">
-                  {product.title}
+                  {product.name}
                 </h3>
                 <p className="text-center text-gray-600 mb-2">Giá: <strong>{product.price}</strong></p>
 
@@ -238,20 +254,22 @@ export default function Home() {
                   {product.favorite ? (
                     <span className="text-red-500 text-xl">&hearts;</span>
                   ) : (
-                    <span className="text-gray-400 text-xl">&hearts;</span>
+                    <button onClick={()=> addToWishlist(product)}>
+                      <span className="text-gray-400 text-xl">&hearts;</span>
+                    </button>
                   )}
                 </div>
                 
                 {/* Product Image */}
                 <img
-                  src={product.image}
-                  alt={product.title}
+                  src={product.image[0]}
+                  alt={product.name}
                   className="w-32 h-32 mx-auto mb-4 object-contain"
                 />
 
                 {/* Product Details */}
                 <h3 className="text-sm font-semibold text-gray-800 text-center mb-1">
-                  {product.title}
+                  {product.name}
                 </h3>
                 <p className="text-center text-gray-600 mb-2">Giá: <strong>{product.price}</strong></p>
 
