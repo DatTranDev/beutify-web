@@ -2,97 +2,133 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { Slider } from "@/components/ui/slider"
-
+import { useWishlist } from "@/context/WishListContext";
 import { useState } from "react";
 export default function ProductList() {
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const pathNames: { [key: string]: string } = {
     product: "Sản phẩm",
     cleanser: "Sữa rửa mặt",
     spa: "SPA",
   };
-  const products = [
+  const products: Product[] = [
     {
       id: 1,
-      image: "/images/product1.png", // Replace with actual image
-      title: "Son môi MAC Matte Lipstick",
+      name: "Son môi MAC Matte Lipstick",
+      category: "Lip",
+      shortDescription: "A beautiful lipstick",
+      description: "Long-lasting lipstick with rich color payoff.",
       price: "230,000đ",
-      rating: 3.5,
+      image: ["/images/product1.png"],
+      favorite: false,
       reviews: "1.7k",
-      favorite: true
+      rating: 3.5
     },
     {
       id: 2,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Son môi Dior Rouge Lipstick",
+      category: "Lip",
+      shortDescription: "A luxurious Dior lipstick",
+      description: "Smooth and creamy texture for elegant lips.",
+      price: "450,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "2.5k",
+      rating: 4.5
     },
     {
       id: 3,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Son dưỡng Nivea Care",
+      category: "Skincare",
+      shortDescription: "Moisturizing lip balm",
+      description: "Provides soft and nourished lips throughout the day.",
+      price: "90,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "500",
+      rating: 4.0
     },
     {
       id: 4,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Kem dưỡng ẩm Cetaphil",
+      category: "Skincare",
+      shortDescription: "Gentle moisturizing cream",
+      description: "Clinically proven to hydrate and soothe dry skin.",
+      price: "300,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "1.2k",
+      rating: 4.2
     },
     {
       id: 5,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Serum Vitamin C La Roche-Posay",
+      category: "Skincare",
+      shortDescription: "Brightening serum",
+      description: "Helps reduce dark spots and brighten skin.",
+      price: "540,000đ",
+      image: ["/images/product1.png"],
+      favorite: true,
+      reviews: "2.1k",
+      rating: 4.8
     },
     {
       id: 6,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Phấn phủ Maybelline Fit Me",
+      category: "Makeup",
+      shortDescription: "Lightweight powder",
+      description: "Keeps your face matte and smooth all day long.",
+      price: "190,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "3.4k",
+      rating: 4.0
     },
     {
       id: 7,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Kem nền Estee Lauder Double Wear",
+      category: "Makeup",
+      shortDescription: "Full coverage foundation",
+      description: "Provides a flawless finish for up to 24 hours.",
+      price: "1,200,000đ",
+      image: ["/images/product1.png"],
+      favorite: true,
+      reviews: "1.8k",
+      rating: 4.6
     },
     {
       id: 8,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Nước hoa hồng Thayers",
+      category: "Skincare",
+      shortDescription: "Alcohol-free toner",
+      description: "Refreshes and soothes skin with natural ingredients.",
+      price: "320,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "2.9k",
+      rating: 4.3
     },
     {
       id: 9,
-      image: "/images/product1.png",
-      title: "Son môi MAC Matte Lipstick",
-      price: "230,000đ",
-      rating: 3.5,
-      reviews: "1.7k",
-      favorite: false
+      name: "Xịt khoáng Vichy",
+      category: "Skincare",
+      shortDescription: "Hydrating facial mist",
+      description: "Instantly refreshes and hydrates your skin.",
+      price: "220,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "900",
+      rating: 4.1
     }
   ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10; // Tổng số trang
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+  const [list, setList] = useState(products);
   // biến để cập nhật status của các thành phần collapse
   const [status, setStatus] = useState<{ [key: string]: boolean }>({});
   const handleCollapse = (key: string) => {
@@ -137,7 +173,7 @@ export default function ProductList() {
               <h3 className="title_filter font-bold text-[20px]">Lọc sản phẩm</h3>
               {/* collapse Thành phần */}
               {/* <!-- Collapse Button --> */}
-              <button id="collapseButton" onClick={() => { handleCollapse("ingredient") }} className="
+              <button id="collapseButton_ingredient" onClick={() => { handleCollapse("ingredient") }} className="
               focus:bg-gray-100
               hover:bg-gray-100 w-full px-2  py-2 mt-4 flex items-center rounded-[10px]
               transition-all duration-300 relative">
@@ -165,7 +201,7 @@ export default function ProductList() {
               </div>
 
               {/* collapse Loại da */}
-              <button id="collapseButton" onClick={() => { handleCollapse("skinType") }} className="
+              <button id="collapseButton_skinType" onClick={() => { handleCollapse("skinType") }} className="
               focus:bg-gray-100
               hover:bg-gray-100 w-full px-2 py-2 flex items-center rounded-[10px]
               transition-all duration-300 relative">
@@ -193,7 +229,7 @@ export default function ProductList() {
               </div>
 
               {/* collapse Xuất sứ */}
-              <button id="collapseButton" onClick={() => { handleCollapse("Country") }} className="
+              <button id="collapseButton_Country" onClick={() => { handleCollapse("Country") }} className="
               focus:bg-gray-100
               hover:bg-gray-100 w-full px-2 py-2 flex items-center rounded-[10px]
               transition-all duration-300 relative">
@@ -251,31 +287,42 @@ export default function ProductList() {
                 </select>
               </div>
               {/* list */}
-              <div className="inner_List grid grid-cols-2 md:grid-cols-4 gap-6">
-                {products.map((product) => (
+              {/* Product Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {list.map((product) => (
                   <div
                     key={product.id}
-                    className="border rounded-lg p-10 shadow-sm hover:shadow-md transition-shadow duration-300"
+                    className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
                   >
                     {/* Favorite Icon */}
                     <div className="flex justify-end">
                       {product.favorite ? (
-                        <span className="text-red-500 text-xl">&hearts;</span>
+                        <button onClick={() => {
+                          removeFromWishlist(product.id);
+                          setList(list.map((item) => item.id === product.id ? { ...item, favorite: false } : item));
+                        }}>
+                          <span className="text-red-500 text-xl">&hearts;</span>
+                        </button>
                       ) : (
-                        <span className="text-gray-400 text-xl">&hearts;</span>
+                        <button onClick={() => {
+                          addToWishlist(product);
+                          setList(list.map((item) => item.id === product.id ? { ...item, favorite: true } : item));
+                        }}>
+                          <span className="text-gray-400 text-xl">&hearts;</span>
+                        </button>
                       )}
                     </div>
 
                     {/* Product Image */}
                     <img
-                      src={product.image}
-                      alt={product.title}
+                      src={product.image[0]}
+                      alt={product.name}
                       className="w-32 h-32 mx-auto mb-4 object-contain"
                     />
 
                     {/* Product Details */}
                     <h3 className="text-sm font-semibold text-gray-800 text-center mb-1">
-                      {product.title}
+                      {product.name}
                     </h3>
                     <p className="text-center text-gray-600 mb-2">Giá: <strong>{product.price}</strong></p>
 
@@ -294,6 +341,41 @@ export default function ProductList() {
                     </div>
                   </div>
                 ))}
+              </div>
+              {/* pagination */}
+              <div className="flex justify-center items-center mt-8">
+                <button
+                  className="px-4 py-2 mx-1 text-white bg-[--peach] hover:bg-[--pink] rounded-md disabled:bg-gray-300"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  &laquo; Previous
+                </button>
+
+                {/* Các trang */}
+                {[...Array(totalPages)].map((_, index) => {
+                  const page = index + 1;
+                  return (
+                    <button
+                      key={page}
+                      className={`px-4 py-2 mx-1 text-sm font-medium rounded-md ${currentPage === page
+                        ? "bg-[--peach] text-white"
+                        : "bg-white text-black hover:bg-[--wheat]"
+                        }`}
+                      onClick={() => handlePageChange(page)}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+
+                <button
+                  className="px-4 py-2 mx-1 text-white bg-[--peach] hover:bg-[--pink] rounded-md disabled:bg-gray-300"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next &raquo;
+                </button>
               </div>
             </div>
           </div>
