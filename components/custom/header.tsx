@@ -66,7 +66,7 @@ export default function Header() {
                         <NavigationMenuLink asChild>
                             <a
                             className="font-sans font-medium"
-                            href="/product/1"
+                            href="/product"
                             >
                             Eyes
                             </a>
@@ -76,7 +76,7 @@ export default function Header() {
                         <NavigationMenuLink asChild>
                             <a
                             className=""
-                            href="/product/3"
+                            href="/product"
                             >
                             Face
                             </a>
@@ -86,7 +86,7 @@ export default function Header() {
                         <NavigationMenuLink asChild>
                             <a
                             className=""
-                            href="/product/2"
+                            href="/product"
                             >
                             Lip
                             </a>
@@ -96,7 +96,7 @@ export default function Header() {
                         <NavigationMenuLink asChild>
                             <a
                             className=""
-                            href="/product/4"
+                            href="/product"
                             >
                             Makeup Tools
                             </a>
