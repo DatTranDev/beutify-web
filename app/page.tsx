@@ -81,7 +81,10 @@ export default function Home() {
           };
           handleCookies();
       }, []);
-
+      const router = useRouter();
+  const viewProductDtails = () => {
+    return router.push('/product/10')
+  }
   return (
     <div>
       {/* Slider Banner */}
@@ -149,7 +152,7 @@ export default function Home() {
                 letters, as opposed to using 'Content here, content here', making it
                 look like readable English.
               </p>
-              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full">
+              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full" onClick={viewProductDtails}>
                 Xem chi tiết
               </button>
             </div>
@@ -165,13 +168,13 @@ export default function Home() {
                   NEW
                 </span>
               </div>
-            </div>       
+            </div>
           </div>
         </div>
         <div className="py-6 px-44">
           {/* Section Title */}
           <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
-          
+
           {/* Product Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {list.map((product) => (
@@ -197,7 +200,7 @@ export default function Home() {
                     </button>
                   )}
                 </div>
-                
+
                 {/* Product Image */}
                 <img
                   src={product.image[0]}
@@ -216,9 +219,8 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
                       key={index}
-                      className={`text-yellow-400 ${
-                        index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                      }`}
+                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
+                        }`}
                     >
                       &#9733;
                     </span>
@@ -243,7 +245,7 @@ export default function Home() {
                   NEW
                 </span>
               </div>
-            </div>    
+            </div>
             {/* Left Content Section */}
             <div className="lg:w-1/2 mb-8 lg:mb-0">
               <h2 className="text-2xl lg:text-3xl font-bold italic mb-4 text-gray-800">
@@ -256,7 +258,7 @@ export default function Home() {
                 letters, as opposed to using 'Content here, content here', making it
                 look like readable English.
               </p>
-              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full">
+              <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full" onClick={viewProductDtails}>
                 Xem chi tiết
               </button>
             </div>
@@ -265,7 +267,7 @@ export default function Home() {
         <div className="py-6 px-44">
           {/* Section Title */}
           <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
-          
+
           {/* Product Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {list.map((product) => (
@@ -291,7 +293,7 @@ export default function Home() {
                     </button>
                   )}
                 </div>
-                
+
                 {/* Product Image */}
                 <img
                   src={product.image[0]}
@@ -310,9 +312,8 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
                       key={index}
-                      className={`text-yellow-400 ${
-                        index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                      }`}
+                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
+                        }`}
                     >
                       &#9733;
                     </span>

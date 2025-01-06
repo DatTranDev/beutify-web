@@ -50,10 +50,9 @@ export default async function RootLayout({
       </head>
       <body>
         <WishlistProvider>
-          
         {
           !match && <Header></Header> } 
-          <div className="">
+          <div className="mt-16">
             {children}
           </div>
           {
