@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { getCookies, navigate, setCookies } from "@/lib/action";
 import { useWishlist } from "@/context/WishListContext";
 
-export default function header() {
+export default function Header() {
     const { wishlist, addToWishlist, removeFromWishlist} = useWishlist();
     const [showWishlist, setShowWishlist] = useState(false);
 
@@ -42,7 +42,7 @@ export default function header() {
                 <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem >
-                    <Link href="/home" legacyBehavior passHref>
+                    <Link href="/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                         Trang chủ
                         </NavigationMenuLink>
