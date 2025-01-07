@@ -22,7 +22,7 @@ export default function Question() {
     const nextPage = () => setCurrentPage((prev) => prev + 1);
     const prevPage = () => setCurrentPage((prev) => prev - 1);
 
-    
+
 
     useEffect(() => {
         const handleCookies = async () => {
@@ -42,8 +42,7 @@ export default function Question() {
 
     // Reusable button class for styling
     const buttonStyle = (isSelected: boolean) =>
-        `px-4 py-2 rounded-md ${
-            isSelected ? "bg-[#FF9B99] text-white" : "bg-gray-200 hover:bg-gray-300"
+        `px-4 py-2 rounded-md ${isSelected ? "bg-[#FF9B99] text-white" : "bg-gray-200 hover:bg-gray-300"
         }`;
 
     return (
@@ -98,7 +97,7 @@ export default function Question() {
                                 onClick={nextPage}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Next
+                                Kế tiếp
                             </button>
                         </div>
                     </div>
@@ -136,13 +135,13 @@ export default function Question() {
                                 onClick={prevPage}
                                 className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
                             >
-                                Previous
+                                Quay lại
                             </button>
                             <button
                                 onClick={nextPage}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Next
+                                Kế tiếp
                             </button>
                         </div>
                     </div>
@@ -172,13 +171,13 @@ export default function Question() {
                                 onClick={prevPage}
                                 className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
                             >
-                                Previous
+                                Quay lại
                             </button>
                             <button
                                 onClick={nextPage}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Next
+                                Kế tiếp
                             </button>
                         </div>
                     </div>
@@ -209,16 +208,16 @@ export default function Question() {
                                 onClick={prevPage}
                                 className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
                             >
-                                Previous
+                                Quay lại
                             </button>
                             <button
-                                onClick={async () =>{
+                                onClick={async () => {
                                     router.push('/');
                                     await setCookies("user", JSON.stringify("user"));
-                                } }
+                                }}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Finish
+                                Hoàn thành
                             </button>
                         </div>
                     </div>
