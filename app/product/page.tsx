@@ -4,8 +4,10 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Slider } from "@/components/ui/slider"
 import { useWishlist } from "@/context/WishListContext";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 export default function ProductList() {
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const router = useRouter();
   const pathNames: { [key: string]: string } = {
     product: "Sản phẩm",
     cleanser: "Sữa rửa mặt",
@@ -147,6 +149,9 @@ export default function ProductList() {
       ...prevStatus,
       [key]: !prevStatus[key]
     }));
+  }
+  const handleProductClick = (productId: number) => {
+    router.push(`/product/${productId}`);
   }
   return (
     <div className="m-auto">
@@ -292,23 +297,28 @@ export default function ProductList() {
                 {list.map((product) => (
                   <div
                     key={product.id}
-                    className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+                    onClick={() => handleProductClick(product.id)}
+                    className="border rounded-lg p-4 shadow-sm hover:shadow-md 
+                    cursor-pointer
+                    transition-shadow duration-300"
                   >
                     {/* Favorite Icon */}
                     <div className="flex justify-end">
                       {product.favorite ? (
-                        <button onClick={() => {
+                        <button onClick={(e) => {
+                          e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
                           removeFromWishlist(product.id);
                           setList(list.map((item) => item.id === product.id ? { ...item, favorite: false } : item));
                         }}>
-                          <span className="text-red-500 text-xl">&hearts;</span>
+                          <span className="text-red-500 text-3xl">&hearts;</span>
                         </button>
                       ) : (
-                        <button onClick={() => {
+                        <button onClick={(e) => {
+                          e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
                           addToWishlist(product);
                           setList(list.map((item) => item.id === product.id ? { ...item, favorite: true } : item));
                         }}>
-                          <span className="text-gray-400 text-xl">&hearts;</span>
+                          <span className="text-gray-400 text-3xl">&hearts;</span>
                         </button>
                       )}
                     </div>

@@ -1,9 +1,13 @@
+"use client";
 import { PiGreaterThanFill } from "react-icons/pi";
 import { PiLessThanFill } from "react-icons/pi";
 import { AiTwotoneLike } from "react-icons/ai";
 import { FaHeart } from "react-icons/fa6";
+import { useWishlist } from "@/context/WishListContext";
 import Link from 'next/link';
-export default async function productDetails({ params }: {
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+export default function productDetails({ params }: {
     params: {
         productId: string;
     }
@@ -58,7 +62,12 @@ export default async function productDetails({ params }: {
             rating: 4.2
         },
     ];
-    const { productId } = await params;
+    const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+    const router = useRouter();
+    const [list, setList] = useState(products);
+    const handleProductClick = (productId: number) => {
+        router.push(`/product/${productId}`);
+    }
     return (
         <>
             <div className="content">
@@ -209,17 +218,34 @@ export default async function productDetails({ params }: {
 
                         {/* Product Grid */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            {products.map((product) => (
+                            {list.map((product) => (
                                 <div
                                     key={product.id}
-                                    className="border rounded-lg p-10 shadow-sm hover:shadow-md transition-shadow duration-300"
+                                    onClick={() => handleProductClick(product.id)}
+                                    className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer"
                                 >
                                     {/* Favorite Icon */}
                                     <div className="flex justify-end">
                                         {product.favorite ? (
-                                            <span className="text-red-500 text-xl">&hearts;</span>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+                                                    removeFromWishlist(product.id);
+                                                    setList(list.map((item) => item.id === product.id ? { ...item, favorite: false } : item));
+                                                }}
+                                            >
+                                                <span className="text-red-500 text-3xl">&hearts;</span>
+                                            </button>
                                         ) : (
-                                            <span className="text-gray-400 text-xl">&hearts;</span>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+                                                    addToWishlist(product);
+                                                    setList(list.map((item) => item.id === product.id ? { ...item, favorite: true } : item));
+                                                }}
+                                            >
+                                                <span className="text-gray-400 text-3xl">&hearts;</span>
+                                            </button>
                                         )}
                                     </div>
 
@@ -241,8 +267,7 @@ export default async function productDetails({ params }: {
                                         {Array.from({ length: 5 }).map((_, index) => (
                                             <span
                                                 key={index}
-                                                className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                                                    }`}
+                                                className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"}`}
                                             >
                                                 &#9733;
                                             </span>

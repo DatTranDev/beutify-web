@@ -12,78 +12,81 @@ import { getCookies, navigate, setCookies } from "@/lib/action";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  
-  const { wishlist, addToWishlist, removeFromWishlist} = useWishlist();
+
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
   const banners = [
     { src: "/images/banner1.jpg", alt: "Banner 1" },
     { src: "/images/banner2.jpg", alt: "Banner 2" },
   ];
   const products: Product[] = [
-    { 
-      id: 1, 
-      name: "Son môi MAC Matte Lipstick", 
-      category: "Lip", 
-      shortDescription: "A beautiful lipstick", 
+    {
+      id: 1,
+      name: "Son môi MAC Matte Lipstick",
+      category: "Lip",
+      shortDescription: "A beautiful lipstick",
       description: "Long-lasting lipstick.",
-      price: "230,000đ", 
-      image: ["/images/product1.png"], 
-      favorite: false, 
-      reviews: "1.7k", 
+      price: "230,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "1.7k",
       rating: 3.5
     },
-    { 
-      id: 2, 
-      name: "Son môi Dior Rouge Lipstick", 
-      category: "Lip", 
-      shortDescription: "A luxurious Dior lipstick", 
+    {
+      id: 2,
+      name: "Son môi Dior Rouge Lipstick",
+      category: "Lip",
+      shortDescription: "A luxurious Dior lipstick",
       description: "Smooth and creamy texture for elegant lips.",
-      price: "450,000đ", 
-      image: ["/images/product1.png"], 
-      favorite: false, 
-      reviews: "2.5k", 
+      price: "450,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "2.5k",
       rating: 4.5
     },
-    { 
-      id: 3, 
-      name: "Son dưỡng Nivea Care", 
-      category: "Skincare", 
-      shortDescription: "Moisturizing lip balm", 
+    {
+      id: 3,
+      name: "Son dưỡng Nivea Care",
+      category: "Skincare",
+      shortDescription: "Moisturizing lip balm",
       description: "Provides soft and nourished lips throughout the day.",
-      price: "90,000đ", 
-      image: ["/images/product1.png"], 
-      favorite: false, 
-      reviews: "500", 
+      price: "90,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "500",
       rating: 4.0
     },
-    { 
-      id: 4, 
-      name: "Kem dưỡng ẩm Cetaphil", 
-      category: "Skincare", 
-      shortDescription: "Gentle moisturizing cream", 
+    {
+      id: 4,
+      name: "Kem dưỡng ẩm Cetaphil",
+      category: "Skincare",
+      shortDescription: "Gentle moisturizing cream",
       description: "Clinically proven to hydrate and soothe dry skin.",
-      price: "300,000đ", 
-      image: ["/images/product1.png"], 
-      favorite: false, 
-      reviews: "1.2k", 
+      price: "300,000đ",
+      image: ["/images/product1.png"],
+      favorite: false,
+      reviews: "1.2k",
       rating: 4.2
     },
   ];
   const [list, setList] = useState(products);
 
   useEffect(() => {
-          const handleCookies = async () => {
-              const userCookie = await getCookies("user");
-              const userString = userCookie?.value;
-              if (!userString) {
-                  navigate("/question");
-              }
-          };
-          handleCookies();
-      }, []);
-      const router = useRouter();
+    const handleCookies = async () => {
+      const userCookie = await getCookies("user");
+      const userString = userCookie?.value;
+      if (!userString) {
+        navigate("/question");
+      }
+    };
+    handleCookies();
+  }, []);
+  const router = useRouter();
   const viewProductDtails = () => {
     return router.push('/product/10')
+  }
+  const handleProductClick = (productId: number) => {
+    router.push(`/product/${productId}`);
   }
   return (
     <div>
@@ -130,7 +133,7 @@ export default function Home() {
           </div>
 
           {/* Bottom Image */}
-          <div className="self-end items-end flex flex-row absolute top-[100%]">
+          <div className="self-end items-end flex flex-row absolute top-[110%]">
             <img
               src="/images/home_about_bot.webp"
               alt="Bottom Display"
@@ -143,14 +146,14 @@ export default function Home() {
             {/* Left Content Section */}
             <div className="lg:w-1/2 mb-8 lg:mb-0">
               <h2 className="text-2xl lg:text-3xl font-bold italic mb-4 text-gray-800">
-                Why do we use it? Where can I get some?
+                Tại sao chúng ta sử dụng son môi? Tôi có thể mua son môi ở đâu?
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                It is a long established fact that a reader will be distracted by the
-                readable content of a page when looking at its layout. The point of
-                using Lorem Ipsum is that it has a more-or-less normal distribution of
-                letters, as opposed to using 'Content here, content here', making it
-                look like readable English.
+                Son môi đã là một phần thiết yếu của thói quen làm đẹp trong nhiều thế kỷ.
+                Nó làm nổi bật các đặc điểm tự nhiên, thêm một chút màu sắc và tăng sự tự tin trong mọi diện mạo.
+                Lý do mọi người thích son môi là vì nó có thể biến một vẻ ngoài đơn giản thành thứ gì đó táo bạo và biểu cảm.
+                Không giống như các sản phẩm làm đẹp khác,
+                son môi vừa linh hoạt vừa sáng tạo, khiến nó trở thành thứ không thể thiếu trong mọi túi đồ trang điểm.
               </p>
               <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full" onClick={viewProductDtails}>
                 Xem chi tiết
@@ -180,23 +183,30 @@ export default function Home() {
             {list.map((product) => (
               <div
                 key={product.id}
-                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+                onClick={() => handleProductClick(product.id)}
+                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer"
               >
                 {/* Favorite Icon */}
                 <div className="flex justify-end">
                   {product.favorite ? (
-                    <button onClick={()=> {
-                      removeFromWishlist(product.id);
-                      setList(list.map((item) => item.id === product.id ? {...item, favorite: false} : item));
-                    }}>
-                      <span className="text-red-500 text-xl">&hearts;</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+                        removeFromWishlist(product.id);
+                        setList(list.map((item) => item.id === product.id ? { ...item, favorite: false } : item));
+                      }}
+                    >
+                      <span className="text-red-500 text-3xl">&hearts;</span>
                     </button>
                   ) : (
-                    <button onClick={()=> {
-                      addToWishlist(product);
-                      setList(list.map((item) => item.id === product.id ? {...item, favorite: true} : item));
-                    }}>
-                      <span className="text-gray-400 text-xl">&hearts;</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+                        addToWishlist(product);
+                        setList(list.map((item) => item.id === product.id ? { ...item, favorite: true } : item));
+                      }}
+                    >
+                      <span className="text-gray-400 text-3xl">&hearts;</span>
                     </button>
                   )}
                 </div>
@@ -219,8 +229,7 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
                       key={index}
-                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                        }`}
+                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"}`}
                     >
                       &#9733;
                     </span>
@@ -249,14 +258,14 @@ export default function Home() {
             {/* Left Content Section */}
             <div className="lg:w-1/2 mb-8 lg:mb-0">
               <h2 className="text-2xl lg:text-3xl font-bold italic mb-4 text-gray-800">
-                Why do we use it? Where can I get some?
+                Tại sao chúng ta sử dụng son môi? Tôi có thể mua son môi ở đâu?
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                It is a long established fact that a reader will be distracted by the
-                readable content of a page when looking at its layout. The point of
-                using Lorem Ipsum is that it has a more-or-less normal distribution of
-                letters, as opposed to using 'Content here, content here', making it
-                look like readable English.
+                Son môi đã là một phần thiết yếu của thói quen làm đẹp trong nhiều thế kỷ.
+                Nó làm nổi bật các đặc điểm tự nhiên, thêm một chút màu sắc và tăng sự tự tin trong mọi diện mạo.
+                Lý do mọi người thích son môi là vì nó có thể biến một vẻ ngoài đơn giản thành thứ gì đó táo bạo và biểu cảm.
+                Không giống như các sản phẩm làm đẹp khác,
+                son môi vừa linh hoạt vừa sáng tạo, khiến nó trở thành thứ không thể thiếu trong mọi túi đồ trang điểm.
               </p>
               <button className="bg-[--lpeach] hover:bg-[--peach] text-white font-semibold py-2 px-6 rounded-full" onClick={viewProductDtails}>
                 Xem chi tiết
@@ -266,30 +275,37 @@ export default function Home() {
         </div>
         <div className="py-6 px-44">
           {/* Section Title */}
-          <h2 className="text-2xl font-bold text-[--pink] mb-6">Chăm sóc da</h2>
+          <h2 className="text-2xl font-bold text-[--pink] mb-6">Sản phẩm phổ biến</h2>
 
           {/* Product Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {list.map((product) => (
               <div
                 key={product.id}
-                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+                onClick={() => handleProductClick(product.id)}
+                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer"
               >
                 {/* Favorite Icon */}
                 <div className="flex justify-end">
                   {product.favorite ? (
-                    <button onClick={()=> {
-                      removeFromWishlist(product.id);
-                      setList(list.map((item) => item.id === product.id ? {...item, favorite: false} : item));
-                    }}>
-                      <span className="text-red-500 text-xl">&hearts;</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+                        removeFromWishlist(product.id);
+                        setList(list.map((item) => item.id === product.id ? { ...item, favorite: false } : item));
+                      }}
+                    >
+                      <span className="text-red-500 text-3xl">&hearts;</span>
                     </button>
                   ) : (
-                    <button onClick={()=> {
-                      addToWishlist(product);
-                      setList(list.map((item) => item.id === product.id ? {...item, favorite: true} : item));
-                    }}>
-                      <span className="text-gray-400 text-xl">&hearts;</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+                        addToWishlist(product);
+                        setList(list.map((item) => item.id === product.id ? { ...item, favorite: true } : item));
+                      }}
+                    >
+                      <span className="text-gray-400 text-3xl">&hearts;</span>
                     </button>
                   )}
                 </div>
@@ -312,8 +328,7 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
                       key={index}
-                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"
-                        }`}
+                      className={`text-yellow-400 ${index < Math.floor(product.rating) ? "opacity-100" : "opacity-50"}`}
                     >
                       &#9733;
                     </span>
