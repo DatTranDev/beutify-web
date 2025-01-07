@@ -2,7 +2,7 @@
 
 export default function Contact() {
     return (
-        <main className="container mx-auto px-44 py-12">
+        <main className="container mx-auto px-44 py-12 mt-16">
             <div className="bg-white rounded-lg">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Liên Hệ Với Chúng Tôi</h2>
                 <p className="text-black leading-relaxed mb-8">

@@ -3,7 +3,7 @@
 export default function Policy() {
     return (
         // < !--Main Content-- >
-        <div className="container mx-auto px-44 py-12">
+        <div className="container mx-auto px-44 py-12 mt-16">
             <div className="bg-white rounded-lg">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Chính Sách Sử Dụng</h2>
                 <p className="text-gray-600 leading-relaxed mb-8">

@@ -154,7 +154,7 @@ export default function ProductList() {
     router.push(`/product/${productId}`);
   }
   return (
-    <div className="m-auto">
+    <div className="m-auto mt-16">
       <div className="content">
         <div className="container px-44 py-4">
           {/* Breadcrumbs */}
@@ -359,7 +359,7 @@ export default function ProductList() {
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
                 >
-                  &laquo; Previous
+                  &laquo; Trước
                 </button>
 
                 {/* Các trang */}
@@ -384,7 +384,7 @@ export default function ProductList() {
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
                 >
-                  Next &raquo;
+                  Sau &raquo;
                 </button>
               </div>
             </div>

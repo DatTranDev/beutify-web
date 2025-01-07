@@ -82,7 +82,7 @@ export default function Header() {
   return (
     <div>
       <header className="flex py-4 px-40 justify-between items-center border-b shadow-sm shadow-gray-400 fixed top-0 left-0 w-full bg-white z-50">
-        <div className="flex items-center ml-4">
+        <div className="flex items-center ml-4 mr-44">
           <img src="/icons/textLogo.svg" className="h-10" alt="logo" />
         </div>
         <div className="flex-grow flex justify-center">
@@ -170,7 +170,7 @@ export default function Header() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <div className="flex items-center mr-8 pl-8">
+        <div className="flex items-center mr-8 pl-16  ">
           {/* Search */}
           <div className="relative me-5">
             <input
