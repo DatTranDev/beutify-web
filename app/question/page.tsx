@@ -120,7 +120,7 @@ export default function Question() {
                                 onClick={nextPage}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Kế tiếp
+                                Tiếp theo
                             </button>
                         </div>
                     </div>
@@ -193,7 +193,7 @@ export default function Question() {
                                 onClick={nextPage}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Kế tiếp
+                                Tiếp theo
                             </button>
                         </div>
                     </div>
@@ -274,7 +274,7 @@ export default function Question() {
                                 onClick={nextPage}
                                 className="px-4 py-2 bg-[#FF9B99] text-white rounded-md hover:bg-[#FF7B7B]"
                             >
-                                Kế tiếp
+                                Tiếp theo
                             </button>
                         </div>
                     </div>
